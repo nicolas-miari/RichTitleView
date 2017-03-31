@@ -16,9 +16,42 @@ class RichTitleView: UIView {
     ///
     private var titleLabel: UILabel!
 
+    var title: String? {
+        set (newvalue) {
+            titleLabel?.text = newvalue
+            titleLabel?.sizeToFit()
+            self.sizeToFit()
+        }
+        get {
+            return titleLabel.text
+        }
+    }
+
+    override func sizeToFit() {
+        let oldCenter = self.center
+
+        super.sizeToFit()
+
+        self.center = oldCenter
+    }
+
+    /*
+    private var temporaryCenter: CGPoint = .zero
+    override var frame: CGRect {
+        willSet {
+            temporaryCenter = self.center
+        }
+        didSet {
+            print("Did Set Frame!: \(frame)")
+            self.center = temporaryCenter
+        }
+    }*/
+
     ///
     init(title: String, image: UIImage?) {
         super.init(frame: CGRect.zero)
+
+        //self.backgroundColor = UIColor.blue
 
         iconImageView = UIImageView(image: image)
 
@@ -34,7 +67,7 @@ class RichTitleView: UIView {
 
         self.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        //titleLabel.backgroundColor = UIColor.yellow
         titleLabel.text          = title
         titleLabel.font          = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .left

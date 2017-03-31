@@ -17,5 +17,14 @@ class ViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    @IBAction func changeTitle(_ sender: Any) {
+
+        guard let titleView = self.navigationItem.titleView as? RichTitleView else {
+            return
+        }
+
+        titleView.title = "Other"
+    }
+
 }
 
